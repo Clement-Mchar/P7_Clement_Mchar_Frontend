@@ -13,6 +13,7 @@ const SignIn = () => {
 		axios({
 			method: "post",
 			url: `${process.env.REACT_APP_API_URL}api/user/login`,
+			withCredentials: true,
 
 			data: {
 				email,
@@ -27,7 +28,6 @@ const SignIn = () => {
 						res.data.errors.password
 					);
 				} else {
-					
 					window.location = "/accueil";
 				}
 			})
@@ -56,14 +56,13 @@ const SignIn = () => {
 							className="single-field"
 							onChange={(e) => setPassword(e.target.value)}
 							value={password}
-							minlength="6" required
+							minlength="6"
+							required
 						/>
 						<div className="password-error"></div>
 					</div>
 
-						<input type="submit" 
-						value="Se connecter" className="login-btn" />
-				
+					<input type="submit" value="Se connecter" className="login-btn" />
 				</form>
 			</div>
 		</div>
