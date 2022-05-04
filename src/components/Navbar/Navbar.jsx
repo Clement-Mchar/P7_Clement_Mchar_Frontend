@@ -21,8 +21,8 @@ const Navbar = () => {
 					<div className="menu wrapper flex">
 						<ul className="profile flex">
 							<li className="welcome flex">
-								<NavLink className="flex" exact="true" to="/profil">
-									<div className="name flex">
+								<NavLink className="edit-profile flex" exact="true" to="/profil">
+									<div className="dynamic-name flex">
 										{userData.firstName} {userData.lastName}{" "}
 									</div>
 									<div className="name flex">
