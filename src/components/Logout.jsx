@@ -16,14 +16,14 @@ const Logout = () => {
 			url: `${process.env.REACT_APP_API_URL}api/user/logout`,
 			withCredentials: true,
 		})
-			.then(() => removeCookie("jwt"), localStorage.removeItem('isAuthenticated'))
+			.then(() => removeCookie("jwt"))
 			.catch((err) => console.log(err));
 
 		window.location = "/";
 	};
 
 	return (
-		<li className="welcome  flex">
+		<li className="logout-btn flex">
 			<button onClick={logout}>
 				<FontAwesomeIcon icon="fa-solid fa-right-from-bracket" />
 			</button>
