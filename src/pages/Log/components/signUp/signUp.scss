@@ -24,11 +24,11 @@
 			.signup-fields {
 				padding: 10px 100px 50px;
 				padding-bottom: 0px;
-	
+				min-height: 420px;
 				.single-field {
 					width: 100%;
 					border: none;
-                    font-family: $main-font;
+					font-family: $main-font;
 					background-color: transparent;
 					border-bottom: 1px solid #ddd;
 					padding: 5px 10px;
@@ -48,19 +48,22 @@
 						outline: none;
 					}
 				}
-
-				.submit-btn {
-                    font-family: $main-font;
-					font-size: $standard-size;
-					font-weight: 500;
-					color: #fff;
-					line-height: 1;
-					padding: 15px 20px;
-					display: block;
-					border: 1px solid transparent;
-					background-color: $main-clr;
-					width: 100%;
-					margin-top: 23px;
+				.btn {
+					flex-direction: column;
+					.submit-btn {
+						font-family: $main-font;
+						font-size: $standard-size;
+						font-weight: 500;
+						color: #fff;
+						line-height: 1;
+						padding: 15px 20px;
+						display: block;
+						border: 1px solid transparent;
+						background-color: $main-clr;
+						width: 100%;
+						margin-top: 40px;
+						margin-bottom: 20px;
+					}
 				}
 			}
 		}
@@ -75,8 +78,8 @@
 			font-size: 16px;
 			padding-top: 5px;
 			color: #333333;
-            font-family: $main-font;
-			button{
+			font-family: $main-font;
+			button {
 				border: 0px;
 				background-color: transparent;
 				color: $main-clr;

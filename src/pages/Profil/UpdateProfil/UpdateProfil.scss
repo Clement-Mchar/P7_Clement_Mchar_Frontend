@@ -1,0 +1,122 @@
+@import "../../../utils/variables.scss";
+
+.profil-container {
+	button:hover {
+		background-color: #df7365;
+	}
+	input:hover {
+		background-color: #df7365;
+	}
+	h1 {
+		justify-content: center;
+		font-family: $main-font;
+        color: $main-clr;
+	}
+
+	.update-container {
+		justify-content: center;
+		h3 {
+			justify-content: center;
+			font-family: $main-font;
+			background-color: $main-clr;
+			font-size: 25px;
+			margin: 0px;
+			color: white;
+			height: 60px;
+			align-items: center;
+		}
+		width: 100%;
+
+		.left-part {
+			flex-direction: column;
+			box-shadow: $shadow;
+			margin-right: 10%;
+			width: 30%;
+			img {
+				width: 70%;
+                max-height: 450px;
+				align-self: center;
+				margin: 10px 0px 40px 0px;
+			}
+		}
+		.right-part {
+			width: 30%;
+		}
+		.bio-update {
+			flex-direction: column;
+			width: 100%;
+			box-shadow: $shadow;
+			height: 750px;
+			button:hover {
+				background-color: #df7365;
+			}
+            h3{
+                height: 70px;
+                background-color: $main-clr;
+            }
+			button {
+				align-self: center;
+				font-family: "Roboto", sans-serif;
+				font-size: 18px;
+				font-weight: 500;
+				color: #fff;
+				line-height: 1;
+				padding: 15px 20px;
+				display: block;
+				border: 1px solid transparent;
+				background-color: $main-clr;
+				max-width: 500px;
+				width: 70%;
+				margin-top: 23px;
+				margin-bottom: 25px;
+				border: #fff 1px solid;
+			}
+			p {
+				height: 720px;
+				max-height: 720px;
+				min-height: 120px;
+				padding: 2px;
+				margin: 0px;
+				font-family: $main-font;
+				font-size: $standard-size;
+				word-wrap: break-word;
+			}
+			textarea {
+                outline: none;
+				height: 716px;
+				resize: none;
+				font-family: $main-font;
+				padding-inline: 4px;
+				background-color: rgb(245, 245, 245);
+				padding: 2px;
+				font-size: $standard-size;
+				border: 1px grey solid;
+			}
+		}
+	}
+    .delete-button{
+        align-self: center;
+        justify-content: center;
+        button {
+            
+            font-family: $main-font;
+            font-size: $standard-size;
+            font-weight: 500;
+            color: #fff;
+            line-height: 1;
+            padding: 15px 20px;
+            display: block;
+            border: 1px solid transparent;
+            background-color: $main-clr;
+            max-width: 500px;
+            width: 70%;
+            margin-top: 23px;
+            margin-bottom: 23px;
+            border: #fff 1px solid;
+
+        }
+		button:hover {
+			background-color: #df7365;
+		}
+    }
+}
