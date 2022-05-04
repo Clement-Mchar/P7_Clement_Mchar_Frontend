@@ -56,7 +56,7 @@ const SignIn = () => {
 							className="single-field"
 							onChange={(e) => setPassword(e.target.value)}
 							value={password}
-							minlength="6"
+							minLength="6"
 							required
 						/>
 						<div className="password-error"></div>
