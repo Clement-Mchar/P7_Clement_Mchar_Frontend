@@ -18,9 +18,7 @@ const Fil = () => {
             
         }
     };
-    useEffect( () => {
-        posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    })
+    
 
     useEffect( () => {
         if ( loadPost ) {
@@ -32,7 +30,7 @@ const Fil = () => {
         return () => window.removeEventListener( 'scroll', loadMore );
         // eslint-disable-next-line
     }, [ loadPost, dispatch ] );
-
+    posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     return (
         <div className='thread-container'>
             <ul>
