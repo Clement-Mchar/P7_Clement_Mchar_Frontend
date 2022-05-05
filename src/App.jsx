@@ -19,7 +19,7 @@ const App = () => {
 			await axios({
 				method: "get",
 				url: `${process.env.REACT_APP_API_URL}jwtid`,
-				withCredentials: true,
+
 			})
 				.then((res) => {
 					setUid(res.data);
