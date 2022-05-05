@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./signUp.scss";
-import SignIn from "../signIn/signIn";
 
 const SignUp = () => {
 	const [ formSubmit, setFormSubmit ] = useState( false );

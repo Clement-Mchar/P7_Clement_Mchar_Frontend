@@ -2,32 +2,52 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dateParser, isEmpty } from '../../../components/Utils';
-import { likePost, unlikePost } from '../../../actions/post.actions';
+import { likePost, unlikePost, updatePost } from '../../../actions/post.actions';
 import { UidContext } from "../../../components/AppContext";
+import DeleteCard from '../components/DeleteCard/DeleteCard';
+import Comments from '../components/Comments/Comments';
 
 const Card = ( { post } ) => {
     const [ isLoading, setIsLoading ] = useState( true );
     const [ liked, setLiked ] = useState( false );
+    const [ isUpdated, setIsUpdated ] = useState( false );
+    const [ textUpdate, setTextUpdate ] = useState( null );
+    const [ showComments, setShowComments ] = useState( false );
     const usersData = useSelector( ( state ) => state.usersReducer );
+    const userData = useSelector( ( state ) => state.userReducer );
     const uid = useContext( UidContext );
     const dispatch = useDispatch();
+
+    const updateItem = () => {
+        if ( textUpdate ) {
+            dispatch( updatePost( post.id, textUpdate ) );
+        }
+        setIsUpdated( false );
+    };
+
     const like = () => {
         dispatch( likePost( post.id, uid ) );
         setLiked( true );
 
     };
     const unlike = () => {
-        dispatch(unlikePost(post.id, uid))
-        setLiked(false);
-      };
+        dispatch( unlikePost( post.id, uid ) );
+        setLiked( false );
+    };
     useEffect( () => {
         !isEmpty( usersData[ 0 ] ) && setIsLoading( false );
     }, [ usersData ] );
 
+    useEffect( () => {
+        if ( post.likes.includes( uid ) ) {
+            setLiked( true );
+
+        }
+    }, [ uid, post.likes, liked ] );
 
 
     return (
-        <li className="card-container flex" key={ post.createdAt }>
+        <li className="card-container flex" key={ post.id }>
             { isLoading ? (
                 <FontAwesomeIcon icon="fa-solid fa-spinner" spin />
             ) : ( <> <div className="card-left">
@@ -43,7 +63,23 @@ const Card = ( { post } ) => {
                         </div>
                         <span>{ dateParser( post.createdAt ) }</span>
                     </div>
-                    <p>{ post.message }</p>
+                    { isUpdated === false &&
+                        <p>{ post.message }</p> }
+                    { isUpdated && (
+                        <div className="update-post">
+                            <textarea defaultValue={ post.message }
+                                onChange={ ( e ) => setTextUpdate( e.target.value ) } />
+                            <div className="button-container" onClick={ updateItem }>
+                                <button className="btn" onClick={ updateItem }>
+                                    Valider modification
+                                </button>
+                            </div>
+
+
+                        </div>
+                    )
+
+                    }
                     { post.picture && (
                         <img src={ post.picture } alt="card-pic" className='card-pic' />
                     ) }
@@ -55,12 +91,19 @@ const Card = ( { post } ) => {
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                         title={ post.id }
-                    ></iframe>
+                    ></iframe> ) }
+                    { userData.id === post.userId && (
+                        <div className="button-container">
+                            <div onClick={ () => setIsUpdated( !isUpdated ) }>
+                                <FontAwesomeIcon icon="fa-solid fa-pen-to-square" />
+                            </div>
+                            <DeleteCard id={ post.id } />
+                        </div>
 
                     ) }
                     <div className="card-footer">
                         <div className="comment-icon">
-                            <FontAwesomeIcon icon="fa-solid fa-comments" />
+                            <FontAwesomeIcon icon="fa-solid fa-comments" onClick={ () => setShowComments( !showComments ) } />
                             <span>
                                 { post.comments.length }
                             </span>
@@ -74,6 +117,7 @@ const Card = ( { post } ) => {
                             { post.likes.length }
                         </span>
                     </div>
+                    { showComments && <Comments post={ post } /> }
                 </div>
             </> ) }
         </li>

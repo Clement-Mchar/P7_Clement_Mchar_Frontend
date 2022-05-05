@@ -18,7 +18,7 @@ const UpdateProfil = () => {
         setUpdateForm( false );
     };
     const handleDelete = () => {
-        if ( window.confirm( 'voulez vous vraiment supprimer le compte et tout ?' ) == true ) {
+        if ( window.confirm( 'voulez vous vraiment supprimer le compte et tout ?' ) === true ) {
             dispatch( deleteUser( userData.id ) );
 
             const removeCookie = ( key ) => {
