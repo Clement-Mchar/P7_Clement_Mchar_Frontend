@@ -18,6 +18,9 @@ const Fil = () => {
             
         }
     };
+    useEffect( () => {
+        posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    })
 
     useEffect( () => {
         if ( loadPost ) {
