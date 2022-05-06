@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty, timestampParser } from '../../../components/Utils';
 import { NavLink } from 'react-router-dom';
 import { addPost, getPosts } from '../../../actions/post.actions';
+import './Publier.scss'
+
 
 const Publier = () => {
     const [ isLoading, setIsLoading ] = useState( true );
@@ -63,32 +65,29 @@ const Publier = () => {
     }, [ userData, message, video ] );
 
     return (
-        <div className="post-container">
+    <div className="page-container flex">   
+        <div className="post-container flex">
             { isLoading ? (
-                <FontAwesomeIcon icon="fa-solid fa-spinner" spin />
+                <FontAwesomeIcon icon="fa-solid fa-spinner" className ="icon flex" spin />
             ) : ( <>
                 <NavLink to="/profil">
-                    <div className="user-info">
+                    <div className="user-info flex">
                         <img src={ userData.profilPicture } alt="profil-pic" />
                     </div>
                 </NavLink>
-                <div className="post-form">
+                <div className="post-form flex">
+                <div className="submit-post flex"> 
                     <textarea name='message' id="message" placeholder='Quoi de neuf ?' onChange={ ( ( e ) => setMessage( e.target.value )
-                    ) } value={ message }>
+                    ) } value={ message } className="txt flex">
                     </textarea>
+                    <button className='send flex' onClick={ handlePost }>Envoyer</button>
+                    </div>
                     { message || postPicture || video.length > 20 ? (
-                        <li className="card-container">
-                            <div className="card-left">
-                                <img src={ userData.profilPicture } alt="user-pic" />
-                            </div>
-                            <div className="card-right">
-                                <div className="card-header">
-                                    <div className="pseudo">
-                                        <h3>{ userData.firstName }{ userData.lastName }</h3>
-                                    </div>
-                                    <span>{ timestampParser( Date.now() ) }</span>
+                        <li className="card-container flex">
+                            <div className="card-right flex">
+                                <div className="card-header flex">
                                 </div>
-                                <div className="content">
+                                <div className="content flex">
                                     <p>{ message }</p>
                                     <img src={ postPicture } alt="" />
                                     { video && (
@@ -104,30 +103,35 @@ const Publier = () => {
                             </div>
                         </li>
                     ) : null }
-                    <div className="footer-form">
-                        <div className="icon">
+                    <div className="right-form flex">
+                        <div className="icon flex">
                             { isEmpty( video ) && (
                                 <>
-                                    <FontAwesomeIcon icon="fa-solid fa-image" />
+                                    <FontAwesomeIcon icon="fa-solid fa-image" className="icon flex" />
                                     <input type="file" id="file-upload" name="picture" accept=".jpg, .jpeg, .png" onChange={ ( e ) => handlePicture( e ) } />
 
                                 </>
                             ) }
                             { video && (
-                                <button onClick={ () => setVideo( "" ) }> Supprimer vidéo </button>
+                                <button onClick={ () => setVideo( "" )  } className="btn flex"> Supprimer vidéo </button>
                             ) }
                         </div>
-                        <div className="btn-send">
+                        <div className="btn send flex" >
                             { message || postPicture || video.length > 20 ? (
-                                <button className="cancel" onClick={ cancelPost }>Annuler le message</button>
+                             <div className="cancel-btn flex">
+<button className="cancel" onClick={ cancelPost }>Annuler le message</button>
+
+                             </div>   
+                                
                             ) : null }
-                            <button className='send' onClick={ handlePost }>Envoyer</button>
+                            
                         </div>
                     </div>
                 </div>
             </>
             ) }
         </div>
+        </div> 
     );
 };
 

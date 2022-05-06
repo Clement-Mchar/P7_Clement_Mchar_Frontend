@@ -7,6 +7,7 @@ import axios from 'axios';
 import Navbar from "../../../components/Navbar/Navbar";
 import UploadImg from '../UploadImg/UploadImg';
 import './UpdateProfil.scss';
+import Footer from '../Footer/Footer';
 
 const UpdateProfil = () => {
     const [ bio, setBio ] = useState( "" );
@@ -75,6 +76,7 @@ const UpdateProfil = () => {
             <div className="delete-button flex">
                 <button onClick={ handleDelete }>Supprimer le compte</button>
             </div>
+            <Footer />
         </div>
     );
 };

@@ -98,12 +98,12 @@ export const deletePost = (postId) => {
 
 }
 
-export const addComment = (postId, userId, message, firstName, lastName) => {
+export const addComment = (postId, userId, message, firstName, lastName ) => {
     return ( dispatch ) => {
         return axios( {
             method: 'patch',
             url: `${process.env.REACT_APP_API_URL}api/comments/${postId}`,
-            data: {userId, message, firstName, lastName},
+            data: {userId, message, firstName, lastName },
             withCredentials: true
         } )
             .then( ( res ) => {

@@ -12,43 +12,37 @@ const SignUp = () => {
 
 	const handleRegister = async ( e ) => {
 		e.preventDefault();
-		const emailError = document.querySelector( ".email-error" );
-		const passwordError = document.querySelector( ".password-error" );
+		const error = document.querySelector( ".error" );
 		const controlPasswordError = document.querySelector(
-			".controlPassword-error"
+			".controlPassword.error"
 		);
 
 		if ( password !== controlPassword ) {
-			controlPasswordError.insertAdjacentHTML(
-				"afterbegin",
-				"les mots de passe ne corrrespondent pas"
-			);
+			controlPasswordError.innerHTML = "les mots de passe ne corrrespondent pas";
 		}
-
-		await axios( {
-			method: "post",
-			url: `${ process.env.REACT_APP_API_URL }api/user/register`,
-			withCredentials: true,
-			data: {
-				email,
-				firstName,
-				lastName,
-				password,
-			},
-		} )
-			.then( ( res ) => {
-				console.log( res );
-				if ( res.data.errors ) {
-
-					emailError.innerHTML = res.data.errors.email;
-					passwordError.innerHTML = res.data.errors.password;
-				} else {
-					setFormSubmit( true );
-				}
+		if ( password === controlPassword ) {
+			await axios( {
+				method: "post",
+				url: `${ process.env.REACT_APP_API_URL }api/user/register`,
+				withCredentials: true,
+				data: {
+					email,
+					firstName,
+					lastName,
+					password,
+				},
 			} )
-			.catch( ( err ) => {
-				console.log( err );
-			} );
+				.then( ( res ) => {
+					if ( res.data.errors ) {
+						error.innerHTML = "Une erreur est survenue, vérifiez vos informations et rééssayez";
+					} else {
+						setFormSubmit( true );
+					}
+				} )
+				.catch( ( err ) => {
+					console.log( err );
+				} );
+		}
 
 	};
 	return (
@@ -66,7 +60,6 @@ const SignUp = () => {
 								onChange={ ( e ) => setEmail( e.target.value ) }
 								value={ email }
 							/>
-							<div className="email-error"></div>
 							<div className="fn-field">
 								<label htmlFor="prénom">Prénom: </label>
 								<input
@@ -75,7 +68,6 @@ const SignUp = () => {
 									onChange={ ( e ) => setFirstName( e.target.value ) }
 									value={ firstName }
 								/>
-								<div className="firstName-error"></div>
 							</div>
 							<div className="ln-field">
 								<label htmlFor="nom">Nom: </label>
@@ -85,7 +77,6 @@ const SignUp = () => {
 									onChange={ ( e ) => setLastName( e.target.value ) }
 									value={ lastName }
 								/>
-								<div className="lastName-error">ezaeazeaze</div>
 							</div>
 							<div className="password-field">
 								<label htmlFor="password">Mot de passe: </label>
@@ -109,19 +100,20 @@ const SignUp = () => {
 									minLength="6"
 									required
 								/>
-								<div className="controlPassword-error"></div>
+								<div className="controlPassword error"></div>
 							</div>
 							<div className="btn flex">
 								<button type="submit " className="submit-btn">
 									Créer un compte
 								</button>
+								<div className="error"></div>
 								{ formSubmit && (
 									<>
 										<h4 className="success">
 											Enregistrement réussi, veuillez-vous connecter
 										</h4>
 									</>
-								)}
+								) }
 							</div>
 						</form>
 					</div>

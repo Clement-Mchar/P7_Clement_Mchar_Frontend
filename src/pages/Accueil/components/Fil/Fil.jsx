@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../../../actions/post.actions';
 import { isEmpty } from '../../../../components/Utils';
-import Card from '../../Card/Card';
-
+import Card from '../Card/Card';
+import './Fil.scss'
 
 
 const Fil = () => {
@@ -18,7 +18,7 @@ const Fil = () => {
             
         }
     };
-    
+
 
     useEffect( () => {
         if ( loadPost ) {
@@ -35,7 +35,7 @@ const Fil = () => {
     
     return (
         <div className='thread-container'>
-            <ul>
+            <ul className='thread flex'>
                 { !isEmpty( posts[ 0 ] ) &&
                     posts.map( ( post ) => {
                         return <Card post={ post } key={ post.id } />;

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deletePost } from '../../../../actions/post.actions';
-
+import '../Card/Card.scss'
 const DeleteCard = (props) => {
     const dispatch = useDispatch()
     const deleteQuote = () => {
@@ -14,7 +14,7 @@ const DeleteCard = (props) => {
                 deleteQuote();
             }
         } }>
-           <FontAwesomeIcon icon="fa-solid fa-trash" alt="delete"/>
+           <FontAwesomeIcon className="icons" icon="fa-solid fa-trash" alt="delete"/>
         </div>
     );
 };

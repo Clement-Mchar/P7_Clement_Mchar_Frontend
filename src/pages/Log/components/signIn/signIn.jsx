@@ -7,8 +7,8 @@ const SignIn = () => {
 	const [password, setPassword] = useState("");
 	const handleLogin = (e) => {
 		e.preventDefault();
-		const emailError = document.querySelector(".email-error");
-		const passwordError = document.querySelector(".password-error");
+
+		const error = document.querySelector(".error");
 
 		axios({
 			method: "post",
@@ -22,11 +22,8 @@ const SignIn = () => {
 		})
 			.then((res) => {
 				if (res.data.errors) {
-					emailError.insertAdjacentHTML("afterbegin", res.data.errors.email);
-					passwordError.insertAdjacentHTML(
-						"afterbegin",
-						res.data.errors.password
-					);
+					error.innerHTML = "Une erreur est survenue, vérifiez vos informations et rééssayez";
+
 				} else {
 					window.location = "/accueil";
 				}
@@ -47,7 +44,6 @@ const SignIn = () => {
 							onChange={(e) => setEmail(e.target.value)}
 							value={email}
 						/>
-						<div className="email-error"></div>
 					</div>
 					<div className="form password">
 						<label htmlFor="password">Mot de passe: </label>
@@ -59,10 +55,10 @@ const SignIn = () => {
 							minLength="6"
 							required
 						/>
-						<div className="password-error"></div>
 					</div>
 
 					<input type="submit" value="Se connecter" className="login-btn" />
+					<div className="error"></div>
 				</form>
 			</div>
 		</div>

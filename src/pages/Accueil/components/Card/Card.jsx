@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { dateParser, isEmpty } from '../../../components/Utils';
-import { likePost, unlikePost, updatePost } from '../../../actions/post.actions';
-import { UidContext } from "../../../components/AppContext";
-import DeleteCard from '../components/DeleteCard/DeleteCard';
-import Comments from '../components/Comments/Comments';
+import { dateParser, isEmpty } from '../../../../components/Utils';
+import { likePost, unlikePost, updatePost } from '../../../../actions/post.actions';
+import { UidContext } from "../../../../components/AppContext";
+import DeleteCard from '../DeleteCard/DeleteCard';
+import Comments from '../Comments/Comments';
+import './Card.scss'
 
 const Card = ( { post } ) => {
     const [ isLoading, setIsLoading ] = useState( true );
@@ -47,29 +48,31 @@ const Card = ( { post } ) => {
 
 
     return (
-        <li className="card-container flex" key={ post.id }>
+        <li className="single-post-container flex" key={ post.id }>
             { isLoading ? (
-                <FontAwesomeIcon icon="fa-solid fa-spinner" spin />
+                <FontAwesomeIcon className="icons"icon="fa-solid fa-spinner" spin />
             ) : ( <> <div className="card-left">
                 <img src={ post.user.profilPicture } alt="poster-pic" />
 
             </div>
-                <div className="card-right">
-                    <div className="card-header">
-                        <div className="poster-name">
-                            <h3>
-                                { post.user.firstName } { post.user.lastName }
+                <div className="card-right flex">
+                    <div className="card-header flex">
+                        <div className="poster-name flex">
+                            <h3 className='flex'>
+                                { post.user.firstName }{" "} { post.user.lastName }
                             </h3>
+                            <span className='flex'>{" "}{ dateParser( post.createdAt ) }</span>
                         </div>
-                        <span>{ dateParser( post.createdAt ) }</span>
+                        
                     </div>
+                    
                     { isUpdated === false &&
                         <p>{ post.message }</p> }
                     { isUpdated && (
-                        <div className="update-post">
+                        <div className="update-post flex">
                             <textarea defaultValue={ post.message }
                                 onChange={ ( e ) => setTextUpdate( e.target.value ) } />
-                            <div className="button-container" onClick={ updateItem }>
+                            <div className="button-container flex" onClick={ updateItem }>
                                 <button className="btn" onClick={ updateItem }>
                                     Valider modification
                                 </button>
@@ -81,7 +84,7 @@ const Card = ( { post } ) => {
 
                     }
                     { post.picture && (
-                        <img src={ post.picture } alt="card-pic" className='card-pic' />
+                        <img src={ post.picture } alt="card-pic" className='card-pic flex' />
                     ) }
                     { post.video && ( <iframe
                         width="500"
@@ -92,18 +95,18 @@ const Card = ( { post } ) => {
                         allowFullScreen
                         title={ post.id }
                     ></iframe> ) }
-                    { userData.id === post.userId && (
-                        <div className="button-container">
+                    { (userData.id === post.userId  || userData.isAdmin === true) && (
+                        <div className="button-container flex">
                             <div onClick={ () => setIsUpdated( !isUpdated ) }>
-                                <FontAwesomeIcon icon="fa-solid fa-pen-to-square" />
+                                <FontAwesomeIcon className="icons" icon="fa-solid fa-pen-to-square" />
                             </div>
                             <DeleteCard id={ post.id } />
                         </div>
 
                     ) }
-                    <div className="card-footer">
+                    <div className="card-footer flex">
                         <div className="comment-icon">
-                            <FontAwesomeIcon icon="fa-solid fa-comments" onClick={ () => setShowComments( !showComments ) } />
+                            <FontAwesomeIcon className="icons" icon="fa-solid fa-comments" onClick={ () => setShowComments( !showComments ) } />
                             <span>
                                 { post.comments.length }
                             </span>
@@ -111,11 +114,12 @@ const Card = ( { post } ) => {
                         <div className="like-container">
                             { liked === false && ( <FontAwesomeIcon icon="fa-solid fa-heart" onClick={ like } className='not-liked' /> ) }
                             { liked && ( <FontAwesomeIcon icon="fa-solid fa-heart" onClick={ unlike } className='liked' /> ) }
-
-                        </div>
-                        <span>
+                            <span>
                             { post.likes.length }
                         </span>
+
+                        </div>
+                        
                     </div>
                     { showComments && <Comments post={ post } /> }
                 </div>
