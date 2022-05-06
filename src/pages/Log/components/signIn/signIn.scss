@@ -16,7 +16,7 @@
 			margin-top: 4%;
 		}
 		.single-field {
-			width: 100%;
+			width: 500px;
 			border: none;
 			background-color: transparent;
 			border-bottom: 1px solid #ddd;
@@ -24,7 +24,7 @@
 			color: #fff;
 			display: inline-block;
 			max-width: 100%;
-			font-size: 2vh;
+			font-size: 18px;
 
 			.email {
 				margin-top: 1%;
@@ -37,13 +37,16 @@
 			align-self: flex-start;
 			text-decoration: none;
 			color: #fff;
-			width: 90%;
+			width: 100%;
+			flex-direction: column;
 			.form {
 				box-sizing: border-box;
+				flex-direction: column;
 			}
 			input {
-				max-width: 100%;
+				max-width: 500px;
 				line-height: normal;
+				width: 100%;
 			}
 			input:focus {
 				outline: none;
@@ -55,7 +58,8 @@
 				color: #dc4734;
 				line-height: 1;
 				padding: 9px 32px;
-				max-height: 6vh;
+				max-height: 40px;
+				min-height: 40px;
 				border: 1px solid transparent;
 				background-color: #fff;
 			}

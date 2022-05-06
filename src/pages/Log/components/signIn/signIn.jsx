@@ -35,8 +35,8 @@ const SignIn = () => {
 	return (
 		<div className="login flex">
 			<div className="login-area flex">
-				<form action="" onSubmit={handleLogin} className="form-field">
-					<div className="form email">
+				<form action="" onSubmit={handleLogin} className="form-field flex">
+					<div className="form email flex">
 						<label htmlFor="email">Email :</label>
 						<input
 							type="text"
@@ -45,7 +45,7 @@ const SignIn = () => {
 							value={email}
 						/>
 					</div>
-					<div className="form password">
+					<div className="form password flex">
 						<label htmlFor="password">Mot de passe: </label>
 						<input
 							type="password"
