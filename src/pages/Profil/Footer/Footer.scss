@@ -1,2 +1,19 @@
-@import "../../../../utils/variables.scss";
+@import "../../../utils/variables.scss";
 
+.footer{
+    height:150px;
+    background-color: $main-clr;
+    
+    ul{
+        width: 80%;
+        margin-left: 50px;
+        align-items: center;
+        justify-content: space-between;
+        li{
+            font-family: "Roboto", sans-serif;
+                    font-size: 22px;
+                    font-weight: 500;
+                    color: #fff;
+        }
+    }
+}

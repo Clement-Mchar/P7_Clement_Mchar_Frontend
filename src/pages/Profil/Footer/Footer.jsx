@@ -5,8 +5,8 @@ const Footer = () => {
     return (
         <div className='footer flex'>
             <ul className='flex'>
-                <li>À propos</li>
-                <li>Nous contacter</li>
+                <li className='flex'>À propos</li>
+                <li className='flex'>Nous contacter</li>
             </ul>
         </div>
     );
