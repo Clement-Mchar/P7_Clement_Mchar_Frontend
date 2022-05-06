@@ -14,7 +14,7 @@ const DeleteCard = (props) => {
                 deleteQuote();
             }
         } }>
-           <FontAwesomeIcon icon="fa-solid fa-trash" alt="trash"/>
+           <FontAwesomeIcon icon="fa-solid fa-trash" alt="delete"/>
         </div>
     );
 };

@@ -25,7 +25,6 @@ const Fil = () => {
             dispatch( getPosts( count ) );
             setLoadPost( false );
             setCount( count + 5 );
-            posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         }
         window.addEventListener( 'scroll', loadMore );
         

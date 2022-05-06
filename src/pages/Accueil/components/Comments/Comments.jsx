@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addComment, getPosts } from '../../../../actions/post.actions';
-import { timestampParser } from '../../../../components/Utils';
+
 
 const Comments = ({post}) => {
     const [ message, setMessage ] = useState("");
