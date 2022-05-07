@@ -2,13 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addComment, getPosts } from '../../../../actions/post.actions';
-import { isEmpty } from '../../../../components/Utils';
 import './Comments.scss';
 import EditDeleteComments from '../EditDeleteComments/EditDeleteComments';
 
 const Comments = ({post}) => {
     const [ message, setMessage ] = useState("");
-    const usersData = useSelector( ( state ) => state.usersReducer );
     const userData = useSelector( ( state ) => state.userReducer );
     const dispatch = useDispatch();
 

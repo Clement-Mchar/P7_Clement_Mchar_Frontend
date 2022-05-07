@@ -3,8 +3,11 @@
 .single-post-container {
     background-color: rgb(255, 255, 255);
 	box-shadow: 0px 3px 20px 0px rgba($color: #0d0d0d, $alpha: 0.2);
-    padding-bottom: 5px;
+    width: 700px;
+	padding: 30px;
+	padding-bottom: 5px;
 	margin-bottom: 25px;
+	
 	.card-left {
 		img {
 			width: 50px;
@@ -15,15 +18,20 @@
 		}
 	}
 
-	width: 700px;
-	padding: 30px;
-
+	
 	.card-right {
 		flex-direction: column;
-		width: 100%
+		width: 100%;
+		.post-media{
+			width:100%;
+		}
 		iframe {
 			width: 600px;
 			height: 400px;
+		}
+		.card-header{
+			width: 100%;
+    		justify-content: space-between;
 		}
         .card-footer{
             justify-content: space-between;
@@ -38,7 +46,7 @@
                     font-family: "Roboto", sans-serif;
                     font-size: 14px;
                     font-weight: 500;
-                    color: rgb(223, 65, 133);
+                    color: rgb(209, 209, 209);
                     border: 1px solid transparent;
                 }
 				.liked{
@@ -108,7 +116,6 @@
 			font-family: "Roboto", sans-serif;
 			font-size: 18px;
 			margin: 20px 0px;
-			height: 50px;
 		}
         .poster-name {
             flex-direction: column;

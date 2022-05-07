@@ -22,10 +22,10 @@ export default function postReducer ( state = initialState, action ) {
                 if ( post.id === action.payload.postId ) {
                     return {
                         ...post,
-                        likes: [ post.likes.filter( ( uid ) => uid, action.payload.userId, action.payload.postId ) ],
+                        likes: [ post.likes.filter( ( uid ) => uid, action.payload.userId, action.payload.postId, ) ],
                     };
                 }
-                return post;
+                return this.post;
             } );
         case UPDATE_POST:
             return state.map( ( post ) => {
