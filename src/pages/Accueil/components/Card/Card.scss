@@ -20,6 +20,7 @@
 
 	.card-right {
 		flex-direction: column;
+		width: 100%
 		iframe {
 			width: 600px;
 			height: 400px;
@@ -31,6 +32,16 @@
             .like-container{
             height: 20px;
                 .not-liked{
+                    height: 22px;
+                    align-items: center;
+                    align-self: center;
+                    font-family: "Roboto", sans-serif;
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: rgb(223, 65, 133);
+                    border: 1px solid transparent;
+                }
+				.liked{
                     height: 22px;
                     align-items: center;
                     align-self: center;

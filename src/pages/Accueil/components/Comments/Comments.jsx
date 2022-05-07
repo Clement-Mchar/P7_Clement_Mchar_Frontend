@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addComment, getPosts } from '../../../../actions/post.actions';
 import { isEmpty } from '../../../../components/Utils';
 import './Comments.scss';
+import EditDeleteComments from '../EditDeleteComments/EditDeleteComments';
 
 const Comments = ({post}) => {
     const [ message, setMessage ] = useState("");
@@ -25,15 +26,16 @@ const Comments = ({post}) => {
                 return (
                     <div className={ comment.postId === userData.id ? "comment-container-client flex" : "comment-container flex" } key={ comment.id }>
                         <div className="left-part flex">
-                            <img src={userData.profilPicture} alt="commenter-pic" />
+                            <img src={comment.user.profilPicture} alt="commenter-pic" />
                         </div>
                         <div className="right-part flex">
                             <div className="comment-header flex">
                                 <div className="pseudo flex">
-                                    <h3 className='pseudo'>{ comment.firstName } { comment.lastName }</h3>
+                                    <h3 className='pseudo'>{ comment.user.firstName } { comment.user.lastName }</h3>
                                 </div>
                             </div>
                             <p>{ comment.message }</p>
+                            <EditDeleteComments comment={comment} postId={post.id} />
                         </div>
                     </div>
                 );

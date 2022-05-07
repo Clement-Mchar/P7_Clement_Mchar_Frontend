@@ -11,6 +11,8 @@ export const DELETE_POST = "DELETE_POST";
 //comments
 
 export const ADD_COMMENT = "ADD_COMMENT";
+export const EDIT_COMMENT = "EDIT_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
 
 
 export const getPosts = ( num ) => {
@@ -113,3 +115,30 @@ export const addComment = (postId, userId, message, firstName, lastName ) => {
     };
 }
 
+export const editComment = (postId, userId, message, id) => {
+    return (dispatch) => {
+      return axios({
+        method: "patch",
+        url: `${process.env.REACT_APP_API_URL}api/comments/${postId}`,
+        data: { userId, message, id },
+      })
+        .then((res) => {
+          dispatch({ type: EDIT_COMMENT, payload: { postId, userId, message, id } });
+        })
+        .catch((err) => console.log(err));
+    };
+  };
+  
+  export const deleteComment = (postId, userId, id) => {
+    return (dispatch) => {
+      return axios({
+        method: "patch",
+        url: `${process.env.REACT_APP_API_URL}api/comments/${postId}`,
+        data: { userId, id },
+      })
+        .then((res) => {
+          dispatch({ type: DELETE_COMMENT, payload: { postId, userId, id } });
+        })
+        .catch((err) => console.log(err));
+    };
+  };

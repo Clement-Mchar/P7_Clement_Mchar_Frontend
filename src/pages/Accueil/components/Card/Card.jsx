@@ -2,11 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dateParser, isEmpty } from '../../../../components/Utils';
-import { likePost, unlikePost, updatePost } from '../../../../actions/post.actions';
+import { likePost, unlikePost, updatePost, getPosts } from '../../../../actions/post.actions';
 import { UidContext } from "../../../../components/AppContext";
 import DeleteCard from '../DeleteCard/DeleteCard';
 import Comments from '../Comments/Comments';
-import './Card.scss'
+import './Card.scss';
 
 const Card = ( { post } ) => {
     const [ isLoading, setIsLoading ] = useState( true );
@@ -33,7 +33,10 @@ const Card = ( { post } ) => {
     };
     const unlike = () => {
         dispatch( unlikePost( post.id, uid ) );
+        dispatch( getPosts());
         setLiked( false );
+        dispatch( getPosts());
+        
     };
     useEffect( () => {
         !isEmpty( usersData[ 0 ] ) && setIsLoading( false );
@@ -50,7 +53,7 @@ const Card = ( { post } ) => {
     return (
         <li className="single-post-container flex" key={ post.id }>
             { isLoading ? (
-                <FontAwesomeIcon className="icons"icon="fa-solid fa-spinner" spin />
+                <FontAwesomeIcon className="icons" icon="fa-solid fa-spinner" spin />
             ) : ( <> <div className="card-left">
                 <img src={ post.user.profilPicture } alt="poster-pic" />
 
@@ -59,13 +62,13 @@ const Card = ( { post } ) => {
                     <div className="card-header flex">
                         <div className="poster-name flex">
                             <h3 className='flex'>
-                                { post.user.firstName }{" "} { post.user.lastName }
+                                { post.user.firstName }{ " " } { post.user.lastName }
                             </h3>
-                            <span className='flex'>{" "}{ dateParser( post.createdAt ) }</span>
+                            <span className='flex'>{ " " }{ dateParser( post.createdAt ) }</span>
                         </div>
-                        
+
                     </div>
-                    
+
                     { isUpdated === false &&
                         <p>{ post.message }</p> }
                     { isUpdated && (
@@ -95,7 +98,7 @@ const Card = ( { post } ) => {
                         allowFullScreen
                         title={ post.id }
                     ></iframe> ) }
-                    { (userData.id === post.userId  || userData.isAdmin === true) && (
+                    { ( userData.id === post.userId || userData.isAdmin === true ) && (
                         <div className="button-container flex">
                             <div onClick={ () => setIsUpdated( !isUpdated ) }>
                                 <FontAwesomeIcon className="icons" icon="fa-solid fa-pen-to-square" />
@@ -115,11 +118,11 @@ const Card = ( { post } ) => {
                             { liked === false && ( <FontAwesomeIcon icon="fa-solid fa-heart" onClick={ like } className='not-liked' /> ) }
                             { liked && ( <FontAwesomeIcon icon="fa-solid fa-heart" onClick={ unlike } className='liked' /> ) }
                             <span>
-                            { post.likes.length }
-                        </span>
+                                { post.likes.length }
+                            </span>
 
                         </div>
-                        
+
                     </div>
                     { showComments && <Comments post={ post } /> }
                 </div>
